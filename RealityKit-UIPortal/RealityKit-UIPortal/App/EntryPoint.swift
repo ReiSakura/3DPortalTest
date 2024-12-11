@@ -9,14 +9,25 @@ import SwiftUI
 
 @main
 struct EntryPoint: App {
+    @State private var appModel = AppModel()
+
     var body: some Scene {
         WindowGroup {
             UIPortalView()
+                .environment(appModel)
         }
+        .windowResizability(.contentSize)
 
         // Defines an immersive space as a part of the scene.
-        ImmersiveSpace(id: "UIPortal") {
+        ImmersiveSpace(id: appModel.immersiveSpaceID) {
             ImmersiveView()
-        }.immersionStyle(selection: .constant(.full), in: .full)
+                .onAppear {
+                    appModel.immersiveSpaceState = .open
+                }
+                .onDisappear {
+                    appModel.immersiveSpaceState = .closed
+                }
+        }
+        .immersionStyle(selection: .constant(.full), in: .full)
     }
 }

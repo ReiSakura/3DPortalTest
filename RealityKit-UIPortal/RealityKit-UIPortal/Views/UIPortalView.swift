@@ -9,14 +9,8 @@ import SwiftUI
 import RealityKit
 
 struct UIPortalView: View {
-    /// The environment value to get the `OpenImmersiveSpaceAction` instance.
-    @Environment(\.openImmersiveSpace) var openImmersiveSpace
-
-    /// The environment value to get the `dismissImmersiveSpace` instance.
-    @Environment(\.dismissImmersiveSpace) var dismissImmersiveSpace
-
-    /// A Boolean value that indicates whether the app shows the immersive space.
-    @State var immersive: Bool = false
+    /// App-wide state
+    @Environment(AppModel.self) private var appModel
 
     /// The root entity for other entities within the scene.
     private let root = Entity()
@@ -28,49 +22,35 @@ struct UIPortalView: View {
     )
 
     var body: some View {
-        if !immersive {
-            portalView
-        } else {
-            /// A button that dismisses the immersive space when someone taps it.
-            Button("Exit") {
-                immersive = false
-                Task {
-                    await dismissImmersiveSpace()
-                }
+        ZStack(alignment: .bottom) {
+            if appModel.immersiveSpaceState == .closed {
+                portalView
             }
+
+            ToggleImmersiveSpaceButton()
+                .padding(50)
         }
     }
 
     /// A view that contains a portal and a button that opens the immersive space.
     var portalView: some View {
-        ZStack {
-            GeometryReader3D { geometry in
-                RealityView { content in
-                    await createPortal()
-                    content.add(root)
-                } update: { content in
-                    // Resize the scene based on the size of the reality view content.
-                    let size = content.convert(geometry.size, from: .local, to: .scene)
-                    updatePortalSize(width: size.x, height: size.y)
-                }.frame(depth: 0.4)
-            }.frame(depth: 0.4)
-
-            VStack {
-                Text("Tap the button to enter the environment.")
-
-                /// A button that opens the immersive space when someone taps it.
-                Button("Enter") {
-                    immersive = true
-                    Task {
-                        await openImmersiveSpace(id: "UIPortal")
-                    }
-                }
+        GeometryReader3D { geometry in
+            RealityView { content in
+                try? await createPortal()
+                content.add(root)
+            } update: { content in
+                // Resize the scene based on the size of the reality view content.
+                let size = content.convert(geometry.size, from: .local, to: .scene)
+                updatePortalSize(width: size.x, height: size.y)
             }
+            .frame(depth: 0.4)
         }
+        .frame(depth: 0.4)
+        .frame(width: 1200, height: 800)
     }
 
     /// Sets up the portal and adds it to the `root.`
-    @MainActor func createPortal() async {
+    func createPortal() async throws {
         // Create the entity that stores the content within the portal.
         let world = Entity()
 
@@ -83,17 +63,13 @@ struct UIPortalView: View {
         // Allow the entity to be visible only through a portal.
         world.components.set(WorldComponent())
         
-        do {
-            // Create the box environment and add it to the root.
-            try await createEnvironment(on: world)
-            root.addChild(world)
+        // Create the box environment and add it to the root.
+        try await createEnvironment(on: world)
+        root.addChild(world)
 
-            // Set up the portal to show the content in the `world`.
-            portalPlane.components.set(PortalComponent(target: world))
-            root.addChild(portalPlane)
-        } catch {
-            fatalError("Failed to create environment: \(error)")
-        }
+        // Set up the portal to show the content in the `world`.
+        portalPlane.components.set(PortalComponent(target: world))
+        root.addChild(portalPlane)
     }
 
     /// Configures the portal mesh's width and height.
