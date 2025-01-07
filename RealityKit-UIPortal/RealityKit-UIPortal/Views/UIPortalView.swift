@@ -11,7 +11,7 @@ import RealityKit
 struct UIPortalView: View {
     /// App-wide state
     @Environment(AppModel.self) private var appModel
-
+    let modelName : String
     /// The root entity for other entities within the scene.
     private let root = Entity()
 
@@ -64,7 +64,7 @@ struct UIPortalView: View {
         world.components.set(WorldComponent())
         
         // Create the box environment and add it to the root.
-        try await createEnvironment(on: world)
+        try await createEnvironment(on: world, modelName: modelName)
         root.addChild(world)
 
         // Set up the portal to show the content in the `world`.

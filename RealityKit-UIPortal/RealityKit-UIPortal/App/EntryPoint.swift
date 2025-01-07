@@ -13,14 +13,14 @@ struct EntryPoint: App {
 
     var body: some Scene {
         WindowGroup {
-            UIPortalView()
+            ContentView()
                 .environment(appModel)
         }
         .windowResizability(.contentSize)
 
-        // Defines an immersive space as a part of the scene.
+        // Defines an immersive space as a part of the scene. 
         ImmersiveSpace(id: appModel.immersiveSpaceID) {
-            ImmersiveView()
+            ImmersiveView().environment(appModel)
                 .onAppear {
                     appModel.immersiveSpaceState = .open
                 }
