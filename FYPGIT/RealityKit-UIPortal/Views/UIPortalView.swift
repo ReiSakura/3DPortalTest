@@ -11,10 +11,10 @@ import RealityKit
 struct UIPortalView: View {
     /// App-wide state
     @Environment(AppModel.self) private var appModel
-    let modelName : String
+    let modelName: String
     /// The root entity for other entities within the scene.
     private let root = Entity()
-
+    @State private var selectedObject: String? = nil
     /// A plane entity representing a portal.
     private let portalPlane = ModelEntity(
         mesh: .generatePlane(width: 1.0, height: 1.0),
@@ -62,9 +62,10 @@ struct UIPortalView: View {
 
         // Allow the entity to be visible only through a portal.
         world.components.set(WorldComponent())
-        
-        // Create the box environment and add it to the root.
+
+        // Create the environment and add it to the world.
         try await createEnvironment(on: world, modelName: modelName)
+
         root.addChild(world)
 
         // Set up the portal to show the content in the `world`.
@@ -76,4 +77,7 @@ struct UIPortalView: View {
     func updatePortalSize(width: Float, height: Float) {
         portalPlane.model?.mesh = .generatePlane(width: width, height: height, cornerRadius: 0.03)
     }
+
+    
 }
+
