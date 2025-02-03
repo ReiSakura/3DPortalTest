@@ -3,10 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12732A322D4FC0F80074703B /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = 12732A312D4FC0F80074703B /* RealityKitContent */; };
+		12732A362D4FC1410074703B /* LearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12732A352D4FC13F0074703B /* LearnMoreView.swift */; };
+		12732A382D4FC1540074703B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12732A372D4FC1530074703B /* ViewModel.swift */; };
+		12732A3A2D4FC1980074703B /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12732A392D4FC1960074703B /* Components.swift */; };
+		12732A3C2D4FC1B00074703B /* AttachmentsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12732A3B2D4FC1AB0074703B /* AttachmentsProvider.swift */; };
 		3726D9602D1E77BC0038D0B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726D95F2D1E77BC0038D0B1 /* ContentView.swift */; };
 		373A80D02D227E9E00438A6C /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A80CF2D227E9E00438A6C /* DropdownMenu.swift */; };
 		373A80D22D22A37D00438A6C /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A80D12D22A37D00438A6C /* NavView.swift */; };
@@ -24,6 +29,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12732A352D4FC13F0074703B /* LearnMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreView.swift; sourceTree = "<group>"; };
+		12732A372D4FC1530074703B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		12732A392D4FC1960074703B /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		12732A3B2D4FC1AB0074703B /* AttachmentsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsProvider.swift; sourceTree = "<group>"; };
 		3726D95F2D1E77BC0038D0B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		373A80CF2D227E9E00438A6C /* DropdownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu.swift; sourceTree = "<group>"; };
 		373A80D12D22A37D00438A6C /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
@@ -50,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12732A322D4FC0F80074703B /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +128,10 @@
 		F5B0CA502CA611F700F43208 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				12732A3B2D4FC1AB0074703B /* AttachmentsProvider.swift */,
+				12732A392D4FC1960074703B /* Components.swift */,
+				12732A372D4FC1530074703B /* ViewModel.swift */,
+				12732A352D4FC13F0074703B /* LearnMoreView.swift */,
 				373A80CF2D227E9E00438A6C /* DropdownMenu.swift */,
 				3726D95F2D1E77BC0038D0B1 /* ContentView.swift */,
 				F5B0CA602CA618AE00F43208 /* ImmersiveView.swift */,
@@ -183,6 +197,9 @@
 				Base,
 			);
 			mainGroup = F5B0C9C62CA6072F00F43208;
+			packageReferences = (
+				12732A302D4FC0F80074703B /* XCLocalSwiftPackageReference "../../NYPcampustour/Packages/RealityKitContent" */,
+			);
 			productRefGroup = F5B0C9D02CA6072F00F43208 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -212,8 +229,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12732A362D4FC1410074703B /* LearnMoreView.swift in Sources */,
+				12732A3A2D4FC1980074703B /* Components.swift in Sources */,
 				F5B0C9D92CA6072F00F43208 /* UIPortalView.swift in Sources */,
 				D77367CB2CFFC7F4008A4DEF /* AppModel.swift in Sources */,
+				12732A382D4FC1540074703B /* ViewModel.swift in Sources */,
 				3726D9602D1E77BC0038D0B1 /* ContentView.swift in Sources */,
 				D77367C92CFFC566008A4DEF /* ToggleImmersiveSpace.swift in Sources */,
 				F5B0CA612CA618B200F43208 /* ImmersiveView.swift in Sources */,
@@ -221,6 +241,7 @@
 				373A80D22D22A37D00438A6C /* NavView.swift in Sources */,
 				F5B0C9D72CA6072F00F43208 /* EntryPoint.swift in Sources */,
 				373A80D02D227E9E00438A6C /* DropdownMenu.swift in Sources */,
+				12732A3C2D4FC1B00074703B /* AttachmentsProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +453,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		12732A302D4FC0F80074703B /* XCLocalSwiftPackageReference "../../NYPcampustour/Packages/RealityKitContent" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../NYPcampustour/Packages/RealityKitContent;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		12732A312D4FC0F80074703B /* RealityKitContent */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = RealityKitContent;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F5B0C9C72CA6072F00F43208 /* Project object */;
 }

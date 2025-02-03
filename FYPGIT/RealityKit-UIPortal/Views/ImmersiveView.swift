@@ -15,7 +15,7 @@ struct ImmersiveView: View {
     let avgHeight: Float = 0
 
     var body: some View {
-        RealityView { content in
+        RealityView { content, attachments in
             // Create the box environment on the root entity.
             let root = Entity()
             let rotation = simd_quatf(angle: .pi / 2, axis: SIMD3<Float>(0, 1, 0))
@@ -33,10 +33,27 @@ struct ImmersiveView: View {
             }
 
             content.add(root)
+            
+            if let entity = attachments.entity(for: "z") {
+                entity.position.x = -1.0
+                entity.position.y = 1.5
+                entity.position.z = -1.0
+                content.add(entity)
+            }
 
             // Reposition the root so it has a similar placement
             // as when someone views it from the portal.
             root.position.z -= 1.0
+            
+        } attachments: {
+            Attachment(id: "z") {
+                LearnMoreView(name: "Phoenix Lake",
+                              description: "Lake · Northern California",
+                              imageNames: ["Landscape_2_Sunset"],
+                              trail: nil
+                              //viewModel: ViewModel()
+                )
+            }
         }
     }
 }
@@ -60,14 +77,14 @@ func createEnvironmentButtons(for environment: String, on parent: Entity) {
             (position: SIMD3<Float>(-4.0, 1.5, 0.0), label: "Study Corner", rotation: simd_quatf(angle: .pi / 2, axis: SIMD3<Float>(0, 1, 0))),
             (position: SIMD3<Float>(0.5, 1.5, 0.0), label: "Hive", rotation: simd_quatf(angle: -.pi / 12, axis: SIMD3<Float>(0, 1, 0)))
                 ],
-                "FypLabScene": [
-                    // TV facing forward
-                    (position: SIMD3<Float>(-1.0, 1.5, -1.0), label: "TV", rotation: simd_quatf(angle: .pi / 4, axis: SIMD3<Float>(0, 1, 0))),
-                    // Bicycle facing sideways
-                    (position: SIMD3<Float>(-1.0, 0.5, 0.0), label: "Bicycle", rotation: simd_quatf(angle: .pi / 4, axis: SIMD3<Float>(0, 1, 0))),
-                    // Robot facing diagonally
-                    (position: SIMD3<Float>(2.0, 0.5, -0.8), label: "Robot", rotation: simd_quatf(angle: -.pi / 4, axis: SIMD3<Float>(0, 1, 0)))
-                ]
+        "FypLabScene": [
+            // TV facing forward
+            (position: SIMD3<Float>(-1.0, 1.5, -1.0), label: "TV", rotation: simd_quatf(angle: .pi / 4, axis: SIMD3<Float>(0, 1, 0))),
+            // Bicycle facing sideways
+            (position: SIMD3<Float>(-1.0, 0.5, 0.0), label: "Bicycle", rotation: simd_quatf(angle: .pi / 4, axis: SIMD3<Float>(0, 1, 0))),
+            // Robot facing diagonally
+            (position: SIMD3<Float>(2.0, 0.5, -0.8), label: "Robot", rotation: simd_quatf(angle: -.pi / 4, axis: SIMD3<Float>(0, 1, 0)))
+        ]
     ]
 
     guard let buttons = buttonConfigurations[environment] else { return }
@@ -117,7 +134,7 @@ func createButton(label: String) -> Entity {
     text.position = SIMD3<Float>(0, 0, 0.15) // Place text in front of the button
     text.model?.materials = [SimpleMaterial(color: .white, isMetallic: false)] // White label
     buttonEntity.addChild(text)
-
+        
     return buttonEntity
 }
 
