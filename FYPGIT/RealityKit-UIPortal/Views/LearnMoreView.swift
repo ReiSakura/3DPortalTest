@@ -1,29 +1,23 @@
-/*
-See the LICENSE.txt file for this sample’s licensing information.
-
-Abstract:
-A view, used as an attachment, that gives information about a point of interest.
-*/
-
 import SwiftUI
 import RealityKit
 
 public struct LearnMoreView: View {
-
     let name: String
     let description: String
-    
+    let position: SIMD3<Float>
+    let rotation: simd_quatf
+
     @State private var showingMoreInfo = false
     @Namespace private var animation
-    
+
     private var titleFont: Font {
         .system(size: 48, weight: .semibold)
     }
-    
+
     private var descriptionFont: Font {
         .system(size: 36, weight: .regular)
     }
-    
+
     public var body: some View {
         VStack {
             ZStack(alignment: .center) {
@@ -33,16 +27,15 @@ public struct LearnMoreView: View {
                         .font(titleFont)
                         .padding()
                 }
-                
+
                 if showingMoreInfo {
                     VStack(alignment: .leading, spacing: 10) {
                         Text(name)
                             .matchedGeometryEffect(id: "Name", in: animation)
                             .font(titleFont)
-                        
+
                         Text(description)
                             .font(descriptionFont)
-                        }
                     }
                 }
             }
@@ -53,21 +46,27 @@ public struct LearnMoreView: View {
             .onTapGesture {
                 withAnimation(.spring) {
                     showingMoreInfo.toggle()
-                    }
                 }
             }
         }
-
+    }
+}
 
 #Preview {
     RealityView { content, attachments in
-        if let entity = attachments.entity(for: "z") {
+        if let entity = attachments.entity(for: "tvInfo") {
+            entity.position = SIMD3<Float>(1.0, 1.5, 0.0)  // Example position
+            entity.orientation = simd_quatf(angle: .pi / 4, axis: SIMD3<Float>(0, 1, 0)) // Example rotation
             content.add(entity)
         }
     } attachments: {
-        Attachment(id: "z") {
-            LearnMoreView(name: "TV",
-                          description: "idk its tv")
+        Attachment(id: "tvInfo") {
+            LearnMoreView(
+                name: "TV",
+                description: "It's a TV",
+                position: SIMD3<Float>(1.0, 1.5, 0.0),
+                rotation: simd_quatf(angle: .pi / 4, axis: SIMD3<Float>(0, 1, 0))
+            )
         }
     }
 }

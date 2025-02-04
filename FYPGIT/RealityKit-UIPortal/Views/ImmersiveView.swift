@@ -11,7 +11,7 @@ import RealityKit
 /// An immersive view that contains the box environment.
 struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
-    /// The average human height in metres.
+    /// The average human height in meters.
     let avgHeight: Float = 0
 
     var body: some View {
@@ -27,20 +27,19 @@ struct ImmersiveView: View {
             // Load the environment using the selected model name.
             do {
                 try await createEnvironment(on: root, modelName: appModel.selectedModelName)
-//                createEnvironmentButtons(for: appModel.selectedModelName, on: root)
             } catch {
                 print("Failed to load environment: \(error.localizedDescription)")
             }
 
             content.add(root)
-            
-            if let entity = attachments.entity(for: "z") {
-                entity.position = SIMD3<Float>(0.0, 0.5, 0.0)
 
-                    // Apply rotation similar to buttons
-                    let rotation = simd_quatf(angle: .pi * 3 / 4, axis: SIMD3<Float>(0, 1, 0)) // Adjust angle as needed
-                    entity.orientation = rotation
-                content.add(entity)
+            // Load attachment entities dynamically
+            for attachmentID in getAttachmentIDs(for: appModel.selectedModelName) {
+                if let entity = attachments.entity(for: attachmentID.id) {
+                    entity.position = attachmentID.position
+                    entity.orientation = attachmentID.rotation
+                    content.add(entity)
+                }
             }
 
             // Reposition the root so it has a similar placement
@@ -48,26 +47,92 @@ struct ImmersiveView: View {
             root.position.z -= 1.0
             
         } attachments: {
-            Attachment(id: "z") {
-                getViewForEnvironment(appModel.selectedModelName)
+            ForEach(getAttachmentIDs(for: appModel.selectedModelName), id: \.id) { attachment in
+                Attachment(id: attachment.id) {
+                    LearnMoreView(
+                        name: attachment.name,
+                        description: attachment.description,
+                        position: attachment.position,
+                        rotation: attachment.rotation
+                    )
+                }
             }
         }
     }
 }
 
-@ViewBuilder
-func getViewForEnvironment(_ environment: String) -> some View {
+/// A struct to hold attachment details.
+struct AttachmentInfo {
+    let id: String
+    let name: String
+    let description: String
+    let position: SIMD3<Float>
+    let rotation: simd_quatf
+}
+
+/// Retrieves the attachment configurations for each environment.
+func getAttachmentIDs(for environment: String) -> [AttachmentInfo] {
     switch environment {
     case "HiveScene":
-        StudyCornerView() // Custom SwiftUI view for this space
-        LearnMoreView(name: "test", description: "test desc")
+        return [
+            AttachmentInfo(
+                id: "studyCornerInfo",
+                name: "Study Corner",
+                description: "A quiet place to focus.",
+                position: SIMD3<Float>(0.0, 1.5, 2.5),
+                rotation: simd_quatf(angle: .pi / 1, axis: SIMD3<Float>(0, 1, 0))
+            ),
+            AttachmentInfo(
+                id: "hiveInfo",
+                name: "Hive",
+                description: "A collaborative workspace.",
+                position: SIMD3<Float>(1.0, 1.5, -1.0),
+                rotation: simd_quatf(angle: .pi / 180, axis: SIMD3<Float>(0, 1, 0))
+            )
+        ]
     case "FypLabScene":
-        EquipmentDetailsView() // Custom SwiftUI view for this space
-        LearnMoreView(name: "Bicycle", description: "Tis a bike.")
+        return [
+            AttachmentInfo(
+                id: "bicycleInfo",
+                name: "Bicycle",
+                description: "A two-wheeled vehicle.",
+                position: SIMD3<Float>(0.0, 0.5, 0.0),
+                rotation: simd_quatf(angle: .pi * 3 / 4, axis: SIMD3<Float>(0, 1, 0))
+            ),
+            AttachmentInfo(
+                id: "robotInfo",
+                name: "Robot",
+                description: "An autonomous machine.",
+                position: SIMD3<Float>(-0.8, 0.8, -2.5),
+                rotation: simd_quatf(angle: .pi / 4, axis: SIMD3<Float>(0, 1, 0))
+            ),
+            AttachmentInfo(
+                id: "tvInfo",
+                name: "Immersive Technology project",
+                description: "A screen for media.",
+                position: SIMD3<Float>(-1.5, 1.5, -0.5),
+                rotation: simd_quatf(angle: .pi * 3 / 4, axis: SIMD3<Float>(0, 1, 0))
+            )
+        ]
     default:
-        DefaultInfoView() // A fallback view
+        return []
     }
 }
+
+
+//@ViewBuilder
+//func getViewForEnvironment(_ environment: String) -> some View {
+//    switch environment {
+//    case "HiveScene":
+//        StudyCornerView() // Custom SwiftUI view for this space
+//        LearnMoreView(name: "test", description: "test desc")
+//    case "FypLabScene":
+//        EquipmentDetailsView() // Custom SwiftUI view for this space
+//        LearnMoreView(name: "Bicycle", description: "Tis a bike.")
+//    default:
+//        DefaultInfoView() // A fallback view
+//    }
+//}
 
 
 /// Updated createEnvironment function to accept a modelName
@@ -80,51 +145,51 @@ func createEnvironment(on root: Entity, modelName: String) async throws {
     root.addChild(assetRoot)
 }
 
-@MainActor
-struct DefaultInfoView: View {
-    var body: some View {
-        VStack {
-            Text("Default Info")
-                .font(.title)
-                .bold()
-            Text("This is default view.")
-                .padding()
-        }
-        .frame(width: 300, height: 200)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
-    }
-}
-
-
-@MainActor
-struct StudyCornerView: View {
-    var body: some View {
-        VStack {
-            Text("Study Corner")
-                .font(.title)
-                .bold()
-            Text("This is a quiet space for studying with comfortable seating and ample lighting.")
-                .padding()
-        }
-        .frame(width: 300, height: 200)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
-    }
-}
-
-@MainActor
-struct EquipmentDetailsView: View {
-    var body: some View {
-        VStack {
-            Text("FYP Lab")
-                .font(.title)
-                .bold()
-            Text("This lab contains various pieces of equipment for final-year projects, including a 3D printer and robotic kits.")
-                .padding()
-        }
-        .frame(width: 300, height: 200)
-        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
-    }
-}
+//@MainActor
+//struct DefaultInfoView: View {
+//    var body: some View {
+//        VStack {
+//            Text("Default Info")
+//                .font(.title)
+//                .bold()
+//            Text("This is default view.")
+//                .padding()
+//        }
+//        .frame(width: 300, height: 200)
+//        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+//    }
+//}
+//
+//
+//@MainActor
+//struct StudyCornerView: View {
+//    var body: some View {
+//        VStack {
+//            Text("Study Corner")
+//                .font(.title)
+//                .bold()
+//            Text("This is a quiet space for studying with comfortable seating and ample lighting.")
+//                .padding()
+//        }
+//        .frame(width: 300, height: 200)
+//        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+//    }
+//}
+//
+//@MainActor
+//struct EquipmentDetailsView: View {
+//    var body: some View {
+//        VStack {
+//            Text("FYP Lab")
+//                .font(.title)
+//                .bold()
+//            Text("This lab contains various pieces of equipment for final-year projects, including a 3D printer and robotic kits.")
+//                .padding()
+//        }
+//        .frame(width: 300, height: 200)
+//        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 12))
+//    }
+//}
 
 
 ///// Creates buttons specific to the environment and positions them.
