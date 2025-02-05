@@ -7,10 +7,15 @@ The app's immersive view.
 
 import SwiftUI
 import RealityKit
+import AVFoundation
 
 /// An immersive view that contains the box environment.
 struct ImmersiveView: View {
     @Environment(AppModel.self) private var appModel
+    
+    @State private var player: AVAudioPlayer?
+    //@State private var audioController: AudioPlaybackController?
+    
     /// The average human height in meters.
     let avgHeight: Float = 0
 
@@ -46,6 +51,18 @@ struct ImmersiveView: View {
             // as when someone views it from the portal.
             root.position.z -= 1.0
             
+
+            //            let ambientAudioEntity = entity.findEntity(named: "ChannelAudio")
+            //
+            //            guard let resource = try? await AudioFileResource(named: "Forest_Sounds.wav") else {
+            //                fatalError("Unable to find audio file Forest_Sounds.wav")
+            //            }
+            //
+            //            audioController = ambientAudioEntity?.prepareAudio(resource)
+            //            audioController?.play()
+            //
+                        playSound()
+            
         } attachments: {
             ForEach(getAttachmentIDs(for: appModel.selectedModelName), id: \.id) { attachment in
                 Attachment(id: attachment.id) {
@@ -57,6 +74,21 @@ struct ImmersiveView: View {
                     )
                 }
             }
+        }
+    }
+    
+    @MainActor
+    func playSound() {
+        guard let path = Bundle.main.path(forResource: "Forest_Sounds", ofType:"wav") else {
+            return }
+        let url = URL(fileURLWithPath: path)
+
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+            
+        } catch let error {
+            print(error.localizedDescription)
         }
     }
 }
