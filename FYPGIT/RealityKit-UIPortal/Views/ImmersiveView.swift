@@ -61,7 +61,7 @@ struct ImmersiveView: View {
             //            audioController = ambientAudioEntity?.prepareAudio(resource)
             //            audioController?.play()
             //
-                        playSound()
+            playSound(for: appModel.selectedModelName)
             
         } attachments: {
             ForEach(getAttachmentIDs(for: appModel.selectedModelName), id: \.id) { attachment in
@@ -78,17 +78,27 @@ struct ImmersiveView: View {
     }
     
     @MainActor
-    func playSound() {
-        guard let path = Bundle.main.path(forResource: "Forest_Sounds", ofType:"wav") else {
-            return }
+    func playSound(for scene: String) {
+        // Map scenes to their respective audio files
+        let audioFiles: [String: String] = [
+            "HiveScene": "Studying.wav",
+            "FypLabScene": "Lofi_Rain.wav"
+        ]
+        
+        // Get the corresponding audio file for the selected scene
+        guard let fileName = audioFiles[scene],
+              let path = Bundle.main.path(forResource: fileName, ofType: nil) else {
+            print("Audio file not found for scene: \(scene)")
+            return
+        }
+        
         let url = URL(fileURLWithPath: path)
 
         do {
             player = try AVAudioPlayer(contentsOf: url)
             player?.play()
-            
-        } catch let error {
-            print(error.localizedDescription)
+        } catch {
+            print("Error playing sound: \(error.localizedDescription)")
         }
     }
 }

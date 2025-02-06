@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37006AF02D54781000A0C06C /* Lofi_Rain.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37006AEF2D54781000A0C06C /* Lofi_Rain.wav */; };
+		37006AF22D548EDD00A0C06C /* Studying.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37006AF12D548EDD00A0C06C /* Studying.wav */; };
 		3726D9602D1E77BC0038D0B1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3726D95F2D1E77BC0038D0B1 /* ContentView.swift */; };
 		373A80D02D227E9E00438A6C /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A80CF2D227E9E00438A6C /* DropdownMenu.swift */; };
 		373A80D22D22A37D00438A6C /* NavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A80D12D22A37D00438A6C /* NavView.swift */; };
 		373A80D42D22A4E300438A6C /* Areas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A80D32D22A4E300438A6C /* Areas.swift */; };
 		37A3E6202D1A569700D39810 /* L530_TestScene.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 37A3E61F2D1A569700D39810 /* L530_TestScene.usdz */; };
-		37AC308D2D53693D00DB274B /* Forest_Sounds.wav in Resources */ = {isa = PBXBuildFile; fileRef = 37AC308C2D53693D00DB274B /* Forest_Sounds.wav */; };
 		37C57B182D42034A007D73C8 /* LearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C57B172D42034A007D73C8 /* LearnMoreView.swift */; };
 		37C57B1C2D4244C8007D73C8 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C57B1B2D4244C8007D73C8 /* Components.swift */; };
 		37C57B202D424B6E007D73C8 /* AttachmentsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C57B1F2D424B6E007D73C8 /* AttachmentsProvider.swift */; };
@@ -28,12 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37006AEF2D54781000A0C06C /* Lofi_Rain.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Lofi_Rain.wav; sourceTree = "<group>"; };
+		37006AF12D548EDD00A0C06C /* Studying.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Studying.wav; sourceTree = "<group>"; };
 		3726D95F2D1E77BC0038D0B1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		373A80CF2D227E9E00438A6C /* DropdownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu.swift; sourceTree = "<group>"; };
 		373A80D12D22A37D00438A6C /* NavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavView.swift; sourceTree = "<group>"; };
 		373A80D32D22A4E300438A6C /* Areas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Areas.swift; sourceTree = "<group>"; };
 		37A3E61F2D1A569700D39810 /* L530_TestScene.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = L530_TestScene.usdz; sourceTree = "<group>"; };
-		37AC308C2D53693D00DB274B /* Forest_Sounds.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Forest_Sounds.wav; sourceTree = "<group>"; };
 		37C57B172D42034A007D73C8 /* LearnMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreView.swift; sourceTree = "<group>"; };
 		37C57B1B2D4244C8007D73C8 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		37C57B1F2D424B6E007D73C8 /* AttachmentsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsProvider.swift; sourceTree = "<group>"; };
@@ -142,7 +144,8 @@
 		F5B0CA522CA6122300F43208 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				37AC308C2D53693D00DB274B /* Forest_Sounds.wav */,
+				37006AEF2D54781000A0C06C /* Lofi_Rain.wav */,
+				37006AF12D548EDD00A0C06C /* Studying.wav */,
 				37A3E61F2D1A569700D39810 /* L530_TestScene.usdz */,
 				37CC49232D26726C000200E5 /* HiveScene.usdz */,
 				37CC49252D267653000200E5 /* FypLabScene.usdz */,
@@ -209,12 +212,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37006AF02D54781000A0C06C /* Lofi_Rain.wav in Resources */,
 				37CC49262D267653000200E5 /* FypLabScene.usdz in Resources */,
 				37CC49242D26726C000200E5 /* HiveScene.usdz in Resources */,
 				37A3E6202D1A569700D39810 /* L530_TestScene.usdz in Resources */,
-				37AC308D2D53693D00DB274B /* Forest_Sounds.wav in Resources */,
 				F5B0CA412CA611D600F43208 /* Preview Assets.xcassets in Resources */,
 				F5B0C9E12CA6073000F43208 /* Assets.xcassets in Resources */,
+				37006AF22D548EDD00A0C06C /* Studying.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
