@@ -69,7 +69,6 @@ struct TestView: View {
     @State private var selectedArea: Area? // Tracks the selected area
         @Environment(AppModel.self) private var appModel // Environment object for app-wide state
         private var areas = [
-            Area(name: "L530", modelName: "L530_TestScene"),
             Area(name: "Block L", modelName: "FypLabScene"),
             Area(name: "Block A", modelName: "HiveScene")
         ]
