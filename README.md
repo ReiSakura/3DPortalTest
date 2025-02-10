@@ -67,6 +67,7 @@ A Swift-based application that allows users to explore virtual environments seam
 
 •⁠  ⁠*Swift*: Version 6.0 or later  
 •⁠  ⁠*Xcode*: Version 16.1 or later  
+•⁠  ⁠*VisionPro*: Version 1.2  
 •⁠  ⁠Compatible with macOS/iOS devices.
 
 ---
