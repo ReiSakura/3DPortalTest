@@ -15,7 +15,6 @@ struct ContentView: View {
     // Group areas by blocks
     private var blocks: [Block] = [
         Block(name: "Block L", areas: [
-            Area(name: "L530", modelName: "L530_TestScene"),
             Area(name: "FypLab", modelName: "FypLabScene"),
             Area(name: "Hive", modelName: "HiveScene")
         ]),

@@ -13,7 +13,6 @@
 		373A80D02D227E9E00438A6C /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A80CF2D227E9E00438A6C /* DropdownMenu.swift */; };
 		373A80D42D22A4E300438A6C /* Areas.swift in Sources */ = {isa = PBXBuildFile; fileRef = 373A80D32D22A4E300438A6C /* Areas.swift */; };
 		37C57B182D42034A007D73C8 /* LearnMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C57B172D42034A007D73C8 /* LearnMoreView.swift */; };
-		37C57B1C2D4244C8007D73C8 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C57B1B2D4244C8007D73C8 /* Components.swift */; };
 		37C57B202D424B6E007D73C8 /* AttachmentsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37C57B1F2D424B6E007D73C8 /* AttachmentsProvider.swift */; };
 		37CC49242D26726C000200E5 /* HiveScene.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 37CC49232D26726C000200E5 /* HiveScene.usdz */; };
 		37CC49262D267653000200E5 /* FypLabScene.usdz in Resources */ = {isa = PBXBuildFile; fileRef = 37CC49252D267653000200E5 /* FypLabScene.usdz */; };
@@ -33,7 +32,6 @@
 		373A80CF2D227E9E00438A6C /* DropdownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu.swift; sourceTree = "<group>"; };
 		373A80D32D22A4E300438A6C /* Areas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Areas.swift; sourceTree = "<group>"; };
 		37C57B172D42034A007D73C8 /* LearnMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LearnMoreView.swift; sourceTree = "<group>"; };
-		37C57B1B2D4244C8007D73C8 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 		37C57B1F2D424B6E007D73C8 /* AttachmentsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentsProvider.swift; sourceTree = "<group>"; };
 		37CC49232D26726C000200E5 /* HiveScene.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = HiveScene.usdz; sourceTree = "<group>"; };
 		37CC49252D267653000200E5 /* FypLabScene.usdz */ = {isa = PBXFileReference; lastKnownFileType = file; path = FypLabScene.usdz; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 			children = (
 				37C57B1F2D424B6E007D73C8 /* AttachmentsProvider.swift */,
 				37C57B172D42034A007D73C8 /* LearnMoreView.swift */,
-				37C57B1B2D4244C8007D73C8 /* Components.swift */,
 				373A80CF2D227E9E00438A6C /* DropdownMenu.swift */,
 				3726D95F2D1E77BC0038D0B1 /* ContentView.swift */,
 				F5B0CA602CA618AE00F43208 /* ImmersiveView.swift */,
@@ -224,7 +221,6 @@
 			files = (
 				37C57B182D42034A007D73C8 /* LearnMoreView.swift in Sources */,
 				F5B0C9D92CA6072F00F43208 /* UIPortalView.swift in Sources */,
-				37C57B1C2D4244C8007D73C8 /* Components.swift in Sources */,
 				D77367CB2CFFC7F4008A4DEF /* AppModel.swift in Sources */,
 				3726D9602D1E77BC0038D0B1 /* ContentView.swift in Sources */,
 				D77367C92CFFC566008A4DEF /* ToggleImmersiveSpace.swift in Sources */,
