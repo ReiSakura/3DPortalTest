@@ -125,7 +125,7 @@ func getAttachmentIDs(for environment: String) -> [AttachmentInfo] {
                 description: "A serene space designed for focused learning and deep work.",
                 position: SIMD3<Float>(0.0, 1.5, 2.5),
                 rotation: simd_quatf(angle: .pi / 1, axis: SIMD3<Float>(0, 1, 0)),
-                imageNames: ["Bicycle"]
+                imageNames: ["Hivestudy"]
             ),
             AttachmentInfo(
                 id: "hiveInfo",
@@ -133,7 +133,7 @@ func getAttachmentIDs(for environment: String) -> [AttachmentInfo] {
                 description: "A dynamic co-working space fostering collaboration and creativity.",
                 position: SIMD3<Float>(1.0, 1.5, -1.0),
                 rotation: simd_quatf(angle: .pi / 180, axis: SIMD3<Float>(0, 1, 0)),
-                imageNames: ["Bicycle"]
+                imageNames: ["Hive"]
             )
         ]
     case "FypLabScene":
